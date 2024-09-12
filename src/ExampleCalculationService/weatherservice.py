@@ -40,7 +40,7 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
             wait_for_current_time_update=False,
             terminate_on_error=True,
             calculation_name="weather_prediction",
-            inputs=None,
+            inputs=[],
             outputs=publication_values,
             calculation_function=self.weather_prediction
         )
