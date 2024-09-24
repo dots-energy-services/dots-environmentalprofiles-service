@@ -3,7 +3,7 @@ from datetime import datetime
 from esdl import esdl
 import helics as h
 import logging
-from dots_infrastructure.DataClasses import EsdlId, HelicsCalculationInformation, PublicationDescription, SubscriptionDescription, TimeStepInformation
+from dots_infrastructure.DataClasses import EsdlId, HelicsCalculationInformation, PublicationDescription, SubscriptionDescription, TimeStepInformation, TimeRequestType
 from dots_infrastructure.HelicsFederateHelpers import HelicsSimulationExecutor
 from dots_infrastructure.Logger import LOGGER
 from esdl import EnergySystem
@@ -35,6 +35,7 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
 
         calculation_information = HelicsCalculationInformation(
             time_period_in_seconds=weather_period_in_seconds,
+            time_request_type=TimeRequestType.PERIOD,
             offset=0,
             uninterruptible=False,
             wait_for_current_time_update=False,
@@ -66,7 +67,7 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
 
         weather_period_in_seconds = 900
 
-        calculation_information_schedule = HelicsCalculationInformation(weather_period_in_seconds, 0, False, False,
+        calculation_information_schedule = HelicsCalculationInformation(weather_period_in_seconds, TimeRequestType.PERIOD, 0, False, False,
                                                                         True, "weather_prediction_up_to_next_day", [],
                                                                         publication_values,
                                                                         self.weather_prediction_up_to_next_day)
