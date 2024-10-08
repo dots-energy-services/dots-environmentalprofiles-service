@@ -36,7 +36,7 @@ class Test(unittest.TestCase):
 
         # Execute
         ret_val = service.weather_prediction(None, datetime(2020,9,1,12,0), TimeStepInformation(1,2), "70685f75-e90f-428a-aba4-108dbe2fb0c8", energy_system)
-        # ret_val = service.weather_prediction_up_to_next_day(None, datetime(2020,9,1,12,0), TimeStepInformation(1,2), "70685f75-e90f-428a-aba4-108dbe2fb0c8", energy_system)
+        ret_val = service.weather_prediction_up_to_next_day(None, datetime(2020,9,1,12,0), TimeStepInformation(1,2), "70685f75-e90f-428a-aba4-108dbe2fb0c8", energy_system)
 
 
         # # Implement
