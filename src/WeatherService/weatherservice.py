@@ -61,7 +61,7 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
             "to": to_profile,
             "value": value_profile
         })
-        ret_val.set_index("to", inplace=True)
+        ret_val.set_index("from", inplace=True)
         return ret_val
 
     def init_calculation_service(self, energy_system: esdl.EnergySystem):
