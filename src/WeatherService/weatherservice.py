@@ -90,12 +90,13 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
 
     def weather_prediction(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
 
+        to_date_time = simulation_time + datetime.timedelta(seconds=self.window_size_in_seconds - 1)
         predicted_solar_irradiances = self.solar_irradiances[esdl_id][
-                                      simulation_time:simulation_time + datetime.timedelta(seconds=self.window_size_in_seconds)]["value"].tolist()
+                                      simulation_time:to_date_time]["value"].tolist()
         predicted_air_temperatures = self.air_temperatures[esdl_id][
-                                     simulation_time:simulation_time + datetime.timedelta(seconds=self.window_size_in_seconds)]["value"].tolist()
+                                     simulation_time:to_date_time]["value"].tolist()
         predicted_soil_temperatures = self.soil_temperatures[esdl_id][
-                                      simulation_time:simulation_time + datetime.timedelta(seconds=self.window_size_in_seconds)]["value"].tolist()
+                                      simulation_time:to_date_time]["value"].tolist()
 
         ret_val = {}
         ret_val["solar_irradiance"] = predicted_solar_irradiances
