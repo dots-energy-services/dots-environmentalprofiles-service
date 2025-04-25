@@ -3,12 +3,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "ExampleCalculationService"
+name = "WeatherService"
 version = "0.0.1"
 authors = [
-  { name="Example Author", email="author@example.com" },
+  { name="Gijs Verhoeven", email="g.verhoen.1@tue.nl" },
 ]
-description = "A small example package"
+description = "A weather service for the DOTs platform. The service periodically publishes parts of a weather profile in the ESDL file"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
