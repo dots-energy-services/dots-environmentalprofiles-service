@@ -103,10 +103,6 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
         ret_val["air_temperature"] = predicted_air_temperatures
         ret_val["soil_temperature"] = predicted_soil_temperatures
 
-        LOGGER.debug('predicted_solar_irradiances', predicted_solar_irradiances)
-        LOGGER.debug('predicted_air_temperatures', predicted_air_temperatures)
-        LOGGER.debug('predicted_soil_temperatures', predicted_soil_temperatures)
-
         return ret_val
 
 if __name__ == "__main__":
