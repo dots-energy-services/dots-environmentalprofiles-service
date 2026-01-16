@@ -40,5 +40,23 @@ class Test(unittest.TestCase):
         self.assertListEqual(ret_val["soil_temperature"], expected_outcome_soil_temperature)
         self.assertListEqual(ret_val["solar_irradiance"], expected_outcome_solar_irradiance)
 
+    def test_current_current_weather_data(self):
+        # Arrange
+        service = CalculationServiceWeather()
+        service.init_calculation_service(self.energy_system)
+
+        # Execute
+        ret_val = service.current_current_weather_data({}, datetime(2020,1,14,0,0), TimeStepInformation(1,2), "ebca3673-20de-42bf-b005-2a01926e4564", self.energy_system)
+        
+        # Assert
+        expected_outcome_air_temperature = 285.04999999999995
+        expected_outcome_soil_temperature = 281.15
+        expected_outcome_solar_irradiance = 0.0 
+
+        self.assertEqual(ret_val["air_temperature"], expected_outcome_air_temperature)
+        self.assertEqual(ret_val["soil_temperature"], expected_outcome_soil_temperature)
+        self.assertEqual(ret_val["solar_irradiance"], expected_outcome_solar_irradiance)
+
+
 if __name__ == '__main__':
     unittest.main()
