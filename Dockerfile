@@ -7,6 +7,5 @@ COPY src/WeatherService ./src/WeatherService
 COPY pyproject.toml ./
 COPY README.md ./
 
-RUN pip install -r requirements.txt && \
-    pip install ./
+RUN pip install ./
 ENTRYPOINT ["python3", "src/WeatherService/weatherservice.py"]
