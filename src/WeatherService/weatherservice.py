@@ -3,8 +3,7 @@ import datetime
 import esdl
 from esdl import EnergySystem
 import helics as h
-from dots_infrastructure.DataClasses import HelicsCalculationInformation, PublicationDescription, TimeStepInformation, EsdlId
-from dots_infrastructure.HelicsFederateHelpers import HelicsSimulationExecutor
+from dots_infrastructure.DataClasses import TimeStepInformation, EsdlId
 from dots_infrastructure.Logger import LOGGER
 import pandas as pd
 

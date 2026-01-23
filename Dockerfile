@@ -6,7 +6,7 @@ RUN mkdir /app/
 WORKDIR /app
 
 COPY src/WeatherService ./
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+COPY pyproject.toml ./
+RUN pip install ./
 
-ENTRYPOINT python3 weatherservice.py
+ENTRYPOINT python3 src/WeatherService/weatherservice.py
