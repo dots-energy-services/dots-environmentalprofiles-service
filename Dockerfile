@@ -7,6 +7,7 @@ WORKDIR /app
 
 COPY src/WeatherService ./
 COPY pyproject.toml ./
+COPY README.md ./
 RUN pip install ./
 
 ENTRYPOINT python3 src/WeatherService/weatherservice.py
