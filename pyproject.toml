@@ -13,7 +13,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "helics==3.6.1",
-    "dots_infrastructure==1.0.9rc3",
+    "dots_infrastructure==1.0.9",
     "pandas==2.2.3",
 ]
 classifiers = [
