@@ -81,9 +81,9 @@ class CalculationServiceWeather(WeatherServiceBase):
                                       simulation_time:to_date_time]["value"][0]
 
         ret_val = {}
-        ret_val["solar_irradiance"] = current_solar_irradiances
-        ret_val["air_temperature"] = current_air_temperatures
-        ret_val["soil_temperature"] = current_soil_temperatures
+        ret_val["current_solar_irradiance"] = current_solar_irradiances
+        ret_val["current_air_temperature"] = current_air_temperatures
+        ret_val["current_soil_temperature"] = current_soil_temperatures
 
         return ret_val
 

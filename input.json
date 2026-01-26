@@ -38,26 +38,26 @@
             ]
         },
         {
-            "name": "current current weather data",
+            "name": "current weather data",
             "description" : "Send the current weather data values for the coming 15 minutes.",
             "time_period_in_seconds" : 900,
             "offset_in_seconds" : 0,
             "inputs" : [ ],
             "outputs" : [
                 {
-                    "name" : "solar_irradiance",
+                    "name" : "current_solar_irradiance",
                     "data_type" : "DOUBLE",
                     "description" : "The solar irradiance as float for the coming 15 minutes.",
                     "unit" : "Wm2"
                 },
                 {
-                    "name" : "air_temperature",
+                    "name" : "current_air_temperature",
                     "data_type" : "DOUBLE",
                     "description" : "The air temperature as float for the coming 15 minutes.",
                     "unit" : "K"
                 },
                 {
-                    "name" : "soil_temperature",
+                    "name" : "current_soil_temperature",
                     "data_type" : "DOUBLE",
                     "description" : "The soil temperature as float for the coming 15 minutes.",
                     "unit" : "K"

@@ -53,9 +53,9 @@ class Test(unittest.TestCase):
         expected_outcome_soil_temperature = 281.15
         expected_outcome_solar_irradiance = 0.0 
 
-        self.assertEqual(ret_val["air_temperature"], expected_outcome_air_temperature)
-        self.assertEqual(ret_val["soil_temperature"], expected_outcome_soil_temperature)
-        self.assertEqual(ret_val["solar_irradiance"], expected_outcome_solar_irradiance)
+        self.assertEqual(ret_val["current_air_temperature"], expected_outcome_air_temperature)
+        self.assertEqual(ret_val["current_soil_temperature"], expected_outcome_soil_temperature)
+        self.assertEqual(ret_val["current_solar_irradiance"], expected_outcome_solar_irradiance)
 
 
 if __name__ == '__main__':
