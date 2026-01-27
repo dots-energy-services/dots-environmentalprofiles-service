@@ -3,48 +3,13 @@ import datetime
 import esdl
 from esdl import EnergySystem
 import helics as h
-from dots_infrastructure.DataClasses import HelicsCalculationInformation, PublicationDescription, TimeStepInformation, EsdlId
-from dots_infrastructure.HelicsFederateHelpers import HelicsSimulationExecutor
+from dots_infrastructure.DataClasses import TimeStepInformation, EsdlId
 from dots_infrastructure.Logger import LOGGER
 import pandas as pd
 
-class CalculationServiceWeather(HelicsSimulationExecutor):
+from WeatherService.weather_service_base import WeatherServiceBase
 
-    def __init__(self):
-        super().__init__()
-
-        publication_values = [
-            PublicationDescription(global_flag=True,
-                                   esdl_type="EnvironmentalProfiles",
-                                   output_name="solar_irradiance",
-                                   output_unit="Wm2",
-                                   data_type=h.HelicsDataType.VECTOR),
-            PublicationDescription(global_flag=True,
-                                   esdl_type="EnvironmentalProfiles",
-                                   output_name="air_temperature",
-                                   output_unit="K",
-                                   data_type=h.HelicsDataType.VECTOR),
-            PublicationDescription(global_flag=True,
-                                   esdl_type="EnvironmentalProfiles",
-                                   output_name="soil_temperature",
-                                   output_unit="K",
-                                   data_type=h.HelicsDataType.VECTOR)
-        ]
-
-        weather_period_in_seconds = 900
-
-        calculation_information = HelicsCalculationInformation(
-            time_period_in_seconds=weather_period_in_seconds,
-            offset=0,
-            uninterruptible=False,
-            wait_for_current_time_update=False,
-            terminate_on_error=True,
-            calculation_name="weather_prediction",
-            inputs=[],
-            outputs=publication_values,
-            calculation_function=self.weather_prediction
-        )
-        self.add_calculation(calculation_information)
+class CalculationServiceWeather(WeatherServiceBase):
 
     def parse_profile(self, profile : esdl.DateTimeProfile):
         # Parse the profile and return the values
@@ -68,6 +33,7 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
         LOGGER.info("init calculation service")
         # set windowsizes for different calculations
         self.window_size_in_seconds = 43200
+        self.step_size_in_seconds = 900
 
         for esdl_id in self.simulator_configuration.esdl_ids:
             # set in setup
@@ -102,6 +68,22 @@ class CalculationServiceWeather(HelicsSimulationExecutor):
         ret_val["solar_irradiance"] = predicted_solar_irradiances
         ret_val["air_temperature"] = predicted_air_temperatures
         ret_val["soil_temperature"] = predicted_soil_temperatures
+
+        return ret_val
+
+    def current_current_weather_data(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
+        to_date_time = simulation_time + datetime.timedelta(seconds=self.step_size_in_seconds - 1)
+        current_solar_irradiances = self.solar_irradiances[esdl_id][
+                                      simulation_time:to_date_time]["value"][0]
+        current_air_temperatures = self.air_temperatures[esdl_id][
+                                     simulation_time:to_date_time]["value"][0]
+        current_soil_temperatures = self.soil_temperatures[esdl_id][
+                                      simulation_time:to_date_time]["value"][0]
+
+        ret_val = {}
+        ret_val["current_solar_irradiance"] = current_solar_irradiances
+        ret_val["current_air_temperature"] = current_air_temperatures
+        ret_val["current_soil_temperature"] = current_soil_temperatures
 
         return ret_val
 

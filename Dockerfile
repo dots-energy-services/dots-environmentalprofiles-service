@@ -1,12 +1,11 @@
-FROM python:3.14.0
-# If needed you can use the official python image (larger memory size)
-#FROM python:3.9.0
+FROM python:3.14
 
 RUN mkdir /app/
 WORKDIR /app
 
-COPY src/WeatherService ./
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
+COPY src/WeatherService ./src/WeatherService
+COPY pyproject.toml ./
+COPY README.md ./
 
-ENTRYPOINT python3 weatherservice.py
+RUN pip install ./
+ENTRYPOINT ["python3", "src/WeatherService/weatherservice.py"]

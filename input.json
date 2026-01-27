@@ -1,0 +1,68 @@
+{
+    "name": "Weather service",
+    "esdl_type" : "EnvironmentalProfiles",
+    "description" : "This calculation service performs a load flow calculation based upon the active and reactive power dispatch for all of the household connections.",
+    "relevant_links" : [
+        {
+            "name" : "EnvironmentalProfiles",
+            "url" : "https://energytransition.github.io/#router/doc-content/687474703a2f2f7777772e746e6f2e6e6c2f6573646c/EnvironmentalProfiles.html",
+            "description" : "Details on the EnvironmentalProfiles esdl type"
+        }
+    ],
+    "calculations" : [
+        {
+            "name": "weather prediction",
+            "description" : "Send the values of the weather profile for the coming 12 hours.",
+            "time_period_in_seconds" : 900,
+            "offset_in_seconds" : 0,
+            "inputs" : [ ],
+            "outputs" : [
+                {
+                    "name" : "solar_irradiance",
+                    "data_type" : "VECTOR",
+                    "description" : "The solar irradiance as vector of floats for the next 12 hours in watt per square metre.",
+                    "unit" : "Wm2"
+                },
+                {
+                    "name" : "air_temperature",
+                    "data_type" : "VECTOR",
+                    "description" : "The air temperature as vector of floats for the next 12 hours in Kelvin.",
+                    "unit" : "K"
+                },
+                {
+                    "name" : "soil_temperature",
+                    "data_type" : "VECTOR",
+                    "description" : "The soil temperature as vector of floats for the next 12 hours in Kelvin.",
+                    "unit" : "K"
+                }
+            ]
+        },
+        {
+            "name": "current weather data",
+            "description" : "Send the current weather data values for the coming 15 minutes.",
+            "time_period_in_seconds" : 900,
+            "offset_in_seconds" : 0,
+            "inputs" : [ ],
+            "outputs" : [
+                {
+                    "name" : "current_solar_irradiance",
+                    "data_type" : "DOUBLE",
+                    "description" : "The solar irradiance as float for the coming 15 minutes.",
+                    "unit" : "Wm2"
+                },
+                {
+                    "name" : "current_air_temperature",
+                    "data_type" : "DOUBLE",
+                    "description" : "The air temperature as float for the coming 15 minutes.",
+                    "unit" : "K"
+                },
+                {
+                    "name" : "current_soil_temperature",
+                    "data_type" : "DOUBLE",
+                    "description" : "The soil temperature as float for the coming 15 minutes.",
+                    "unit" : "K"
+                }
+            ]
+        }
+    ]
+}
