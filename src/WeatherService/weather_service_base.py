@@ -35,7 +35,7 @@ class WeatherServiceBase(HelicsSimulationExecutor):
                                     data_type=h.HelicsDataType.VECTOR),
         ]
         weather_prediction_information = HelicsCalculationInformation(
-            time_period_in_seconds=900,
+            time_period_in_seconds=43200,
             offset=0, 
             uninterruptible=False, 
             wait_for_current_time_update=False, 
