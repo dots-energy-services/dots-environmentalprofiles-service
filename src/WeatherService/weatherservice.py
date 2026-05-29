@@ -64,12 +64,12 @@ class CalculationServiceWeather(WeatherServiceBase):
         # predicted_soil_temperatures = self.soil_temperatures[esdl_id][
         #                               simulation_time:to_date_time]["value"].tolist()
 
-        # ret_val = {}
-        # ret_val["solar_irradiance"] = predicted_solar_irradiances
-        # ret_val["air_temperature"] = predicted_air_temperatures
-        # ret_val["soil_temperature"] = predicted_soil_temperatures
+        ret_val = {}
+        ret_val["solar_irradiance"] = [i for i in range(12)]
+        ret_val["air_temperature"] = [i for i in range(12)]
+        ret_val["soil_temperature"] = [i for i in range(12)]
 
-        return 10 # ret_val
+        return ret_val 
 
     def current_current_weather_data(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
         # to_date_time = simulation_time + datetime.timedelta(seconds=self.step_size_in_seconds - 1)
@@ -80,12 +80,12 @@ class CalculationServiceWeather(WeatherServiceBase):
         # current_soil_temperatures = self.soil_temperatures[esdl_id][
         #                               simulation_time:to_date_time]["value"][0]
 
-        # ret_val = {}
-        # ret_val["current_solar_irradiance"] = current_solar_irradiances
-        # ret_val["current_air_temperature"] = current_air_temperatures
-        # ret_val["current_soil_temperature"] = current_soil_temperatures
+        ret_val = {}
+        ret_val["current_solar_irradiance"] = [i*2 for i in range(12)]
+        ret_val["current_air_temperature"] = [i*2 for i in range(12)]
+        ret_val["current_soil_temperature"] = [i*2 for i in range(12)]
 
-        return 5
+        return ret_val
 
 if __name__ == "__main__":
 
