@@ -56,36 +56,36 @@ class CalculationServiceWeather(WeatherServiceBase):
 
     def weather_prediction(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
 
-        to_date_time = simulation_time + datetime.timedelta(seconds=self.window_size_in_seconds - 1)
-        predicted_solar_irradiances = self.solar_irradiances[esdl_id][
-                                      simulation_time:to_date_time]["value"].tolist()
-        predicted_air_temperatures = self.air_temperatures[esdl_id][
-                                     simulation_time:to_date_time]["value"].tolist()
-        predicted_soil_temperatures = self.soil_temperatures[esdl_id][
-                                      simulation_time:to_date_time]["value"].tolist()
+        # to_date_time = simulation_time + datetime.timedelta(seconds=self.window_size_in_seconds - 1)
+        # predicted_solar_irradiances = self.solar_irradiances[esdl_id][
+        #                               simulation_time:to_date_time]["value"].tolist()
+        # predicted_air_temperatures = self.air_temperatures[esdl_id][
+        #                              simulation_time:to_date_time]["value"].tolist()
+        # predicted_soil_temperatures = self.soil_temperatures[esdl_id][
+        #                               simulation_time:to_date_time]["value"].tolist()
 
-        ret_val = {}
-        ret_val["solar_irradiance"] = predicted_solar_irradiances
-        ret_val["air_temperature"] = predicted_air_temperatures
-        ret_val["soil_temperature"] = predicted_soil_temperatures
+        # ret_val = {}
+        # ret_val["solar_irradiance"] = predicted_solar_irradiances
+        # ret_val["air_temperature"] = predicted_air_temperatures
+        # ret_val["soil_temperature"] = predicted_soil_temperatures
 
-        return ret_val
+        return 5 # ret_val
 
     def current_current_weather_data(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
-        to_date_time = simulation_time + datetime.timedelta(seconds=self.step_size_in_seconds - 1)
-        current_solar_irradiances = self.solar_irradiances[esdl_id][
-                                      simulation_time:to_date_time]["value"][0]
-        current_air_temperatures = self.air_temperatures[esdl_id][
-                                     simulation_time:to_date_time]["value"][0]
-        current_soil_temperatures = self.soil_temperatures[esdl_id][
-                                      simulation_time:to_date_time]["value"][0]
+        # to_date_time = simulation_time + datetime.timedelta(seconds=self.step_size_in_seconds - 1)
+        # current_solar_irradiances = self.solar_irradiances[esdl_id][
+        #                               simulation_time:to_date_time]["value"][0]
+        # current_air_temperatures = self.air_temperatures[esdl_id][
+        #                              simulation_time:to_date_time]["value"][0]
+        # current_soil_temperatures = self.soil_temperatures[esdl_id][
+        #                               simulation_time:to_date_time]["value"][0]
 
-        ret_val = {}
-        ret_val["current_solar_irradiance"] = current_solar_irradiances
-        ret_val["current_air_temperature"] = current_air_temperatures
-        ret_val["current_soil_temperature"] = current_soil_temperatures
+        # ret_val = {}
+        # ret_val["current_solar_irradiance"] = current_solar_irradiances
+        # ret_val["current_air_temperature"] = current_air_temperatures
+        # ret_val["current_soil_temperature"] = current_soil_temperatures
 
-        return ret_val
+        return 5
 
 if __name__ == "__main__":
 
