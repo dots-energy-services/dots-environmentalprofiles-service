@@ -81,9 +81,9 @@ class CalculationServiceWeather(WeatherServiceBase):
         #                               simulation_time:to_date_time]["value"][0]
 
         ret_val = {}
-        ret_val["current_solar_irradiance"] = [i*2 for i in range(12)]
-        ret_val["current_air_temperature"] = [i*2 for i in range(12)]
-        ret_val["current_soil_temperature"] = [i*2 for i in range(12)]
+        ret_val["current_solar_irradiance"] = 5
+        ret_val["current_air_temperature"] = 5
+        ret_val["current_soil_temperature"] = 5
 
         return ret_val
 
