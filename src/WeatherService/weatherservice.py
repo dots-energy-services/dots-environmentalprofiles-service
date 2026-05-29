@@ -69,7 +69,7 @@ class CalculationServiceWeather(WeatherServiceBase):
         # ret_val["air_temperature"] = predicted_air_temperatures
         # ret_val["soil_temperature"] = predicted_soil_temperatures
 
-        return 5 # ret_val
+        return 10 # ret_val
 
     def current_current_weather_data(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
         # to_date_time = simulation_time + datetime.timedelta(seconds=self.step_size_in_seconds - 1)
