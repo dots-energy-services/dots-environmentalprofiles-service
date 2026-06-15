@@ -31,7 +31,9 @@ class Test(unittest.TestCase):
     def test_weather_prediction(self):
         test_examples = [
             Path(__file__).parent / 'test.esdl',
-            Path(__file__).parent / 'test-timeseries-profiles.esdl'
+            Path(__file__).parent / 'test-timeseries-profiles.esdl',
+            Path(__file__).parent / 'test-datetime-profiles-different-year.esdl',
+            Path(__file__).parent / 'test-timeseries-profiles-different-year.esdl'
         ]
         for i, example in enumerate(test_examples):
             with self.subTest(i=i, params = example):
@@ -55,7 +57,9 @@ class Test(unittest.TestCase):
     def test_current_current_weather_data(self):
         test_examples = [
             Path(__file__).parent / 'test.esdl',
-            Path(__file__).parent / 'test-timeseries-profiles.esdl'
+            Path(__file__).parent / 'test-timeseries-profiles.esdl',
+            Path(__file__).parent / 'test-datetime-profiles-different-year.esdl',
+            Path(__file__).parent / 'test-timeseries-profiles-different-year.esdl'
         ]
         for i, example in enumerate(test_examples):
             with self.subTest(i=i, params = example):
