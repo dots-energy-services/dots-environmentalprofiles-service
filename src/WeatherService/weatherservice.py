@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import datetime
+from datetime import datetime, timedelta
 import esdl
 from esdl import EnergySystem
 import helics as h
@@ -47,8 +47,8 @@ class CalculationServiceWeather(WeatherServiceBase):
             self.soil_temperatures[esdl_id] = self.parse_profile(soil_temperature_profile)
 
     def weather_prediction(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
-
-        to_date_time = simulation_time + datetime.timedelta(seconds=self.window_size_in_seconds)
+        LOGGER.debug(f"Getting data at simulation time: {simulation_time.strftime(format='%m/%d/%Y %H:%M' )}")
+        to_date_time = simulation_time + timedelta(seconds=self.window_size_in_seconds)
         predicted_solar_irradiances = self.solar_irradiances[esdl_id].get_data_in_timeseries_format(simulation_time, to_date_time, self.step_size_in_seconds)
         predicted_air_temperatures = self.air_temperatures[esdl_id].get_data_in_timeseries_format(simulation_time, to_date_time, self.step_size_in_seconds)
         predicted_soil_temperatures = self.soil_temperatures[esdl_id].get_data_in_timeseries_format(simulation_time, to_date_time, self.step_size_in_seconds)
@@ -61,7 +61,8 @@ class CalculationServiceWeather(WeatherServiceBase):
         return ret_val
 
     def current_current_weather_data(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
-        to_date_time = simulation_time + datetime.timedelta(seconds=self.step_size_in_seconds)
+        LOGGER.debug(f"Getting data at simulation time: {simulation_time.strftime(format='%m/%d/%Y %H:%M' )}")
+        to_date_time = simulation_time + timedelta(seconds=self.step_size_in_seconds)
         current_solar_irradiances = self.solar_irradiances[esdl_id].get_data(simulation_time, to_date_time)[0]
         current_air_temperatures = self.air_temperatures[esdl_id].get_data(simulation_time, to_date_time)[0]
         current_soil_temperatures = self.soil_temperatures[esdl_id].get_data(simulation_time, to_date_time)[0]
