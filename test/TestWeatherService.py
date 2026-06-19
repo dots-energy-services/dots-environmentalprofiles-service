@@ -28,12 +28,11 @@ class Test(unittest.TestCase):
         energy_system = esh.get_energy_system()
         return energy_system
 
-    def test_weather_prediction(self):
+    def test_weather_prediction_time_not_interpolated(self):
         test_examples = [
             Path(__file__).parent / 'test.esdl',
             Path(__file__).parent / 'test-timeseries-profiles.esdl',
-            Path(__file__).parent / 'test-datetime-profiles-different-year.esdl',
-            Path(__file__).parent / 'test-timeseries-profiles-different-year.esdl'
+            Path(__file__).parent / 'test-datetime-profiles-different-year.esdl'
         ]
         for i, example in enumerate(test_examples):
             with self.subTest(i=i, params = example):
@@ -54,12 +53,31 @@ class Test(unittest.TestCase):
                 self.assertListEqual(ret_val["soil_temperature"], expected_outcome_soil_temperature)
                 self.assertListEqual(ret_val["solar_irradiance"], expected_outcome_solar_irradiance)
 
+    def test_weather_prediction_time_interpolated(self):
+        test_examples = [
+            Path(__file__).parent / 'test-timeseries-profiles-different-timestep.esdl'
+        ]
+        for i, example in enumerate(test_examples):
+            with self.subTest(i=i, params = example):
+                # Arrange
+                es = self.set_up_case(example)
+                service = CalculationServiceWeather()
+                service.init_calculation_service(es)
+
+                # Execute
+                ret_val = service.weather_prediction({}, datetime(2020,1,14,0,0), TimeStepInformation(1,2), "ebca3673-20de-42bf-b005-2a01926e4564", es)
+
+                self.assertEqual(len(ret_val["air_temperature"]), 48)
+                self.assertEqual(len(ret_val["soil_temperature"]), 48)
+                self.assertEqual(len(ret_val["solar_irradiance"]), 48)
+
     def test_current_current_weather_data(self):
         test_examples = [
             Path(__file__).parent / 'test.esdl',
             Path(__file__).parent / 'test-timeseries-profiles.esdl',
             Path(__file__).parent / 'test-datetime-profiles-different-year.esdl',
-            Path(__file__).parent / 'test-timeseries-profiles-different-year.esdl'
+            Path(__file__).parent / 'test-timeseries-profiles-different-year.esdl',
+            Path(__file__).parent / 'test-timeseries-profiles-different-timestep.esdl'
         ]
         for i, example in enumerate(test_examples):
             with self.subTest(i=i, params = example):

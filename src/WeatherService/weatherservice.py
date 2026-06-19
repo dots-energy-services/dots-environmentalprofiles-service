@@ -49,9 +49,9 @@ class CalculationServiceWeather(WeatherServiceBase):
     def weather_prediction(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
         LOGGER.debug(f"Getting data at simulation time: {simulation_time.strftime(format='%m/%d/%Y %H:%M' )}")
         to_date_time = simulation_time + timedelta(seconds=self.window_size_in_seconds)
-        predicted_solar_irradiances = self.solar_irradiances[esdl_id].get_data_in_timeseries_format(simulation_time, to_date_time, self.step_size_in_seconds)
-        predicted_air_temperatures = self.air_temperatures[esdl_id].get_data_in_timeseries_format(simulation_time, to_date_time, self.step_size_in_seconds)
-        predicted_soil_temperatures = self.soil_temperatures[esdl_id].get_data_in_timeseries_format(simulation_time, to_date_time, self.step_size_in_seconds)
+        predicted_solar_irradiances = self.solar_irradiances[esdl_id].get_data_in_timeseries_format_interpolated(simulation_time, to_date_time, self.step_size_in_seconds)
+        predicted_air_temperatures = self.air_temperatures[esdl_id].get_data_in_timeseries_format_interpolated(simulation_time, to_date_time, self.step_size_in_seconds)
+        predicted_soil_temperatures = self.soil_temperatures[esdl_id].get_data_in_timeseries_format_interpolated(simulation_time, to_date_time, self.step_size_in_seconds)
 
         ret_val = {}
         ret_val["solar_irradiance"] = predicted_solar_irradiances
