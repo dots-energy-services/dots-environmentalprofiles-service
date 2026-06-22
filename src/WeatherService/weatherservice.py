@@ -20,6 +20,9 @@ class CalculationServiceWeather(WeatherServiceBase):
             return ParsedTimeSeriesProfile(profile)
         else:
             raise ValueError(f"Profile {profile.name} is of an unsupported type")
+        
+    def celcius_to_kelvin(self, celcius : float):
+        return celcius + 273.15
 
     def init_calculation_service(self, energy_system: esdl.EnergySystem):
         LOGGER.info("init calculation service")
@@ -55,22 +58,22 @@ class CalculationServiceWeather(WeatherServiceBase):
 
         ret_val = {}
         ret_val["solar_irradiance"] = predicted_solar_irradiances
-        ret_val["air_temperature"] = predicted_air_temperatures
-        ret_val["soil_temperature"] = predicted_soil_temperatures
+        ret_val["air_temperature"] = [self.celcius_to_kelvin(temp) for temp in predicted_air_temperatures]
+        ret_val["soil_temperature"] = [self.celcius_to_kelvin(temp) for temp in predicted_soil_temperatures]
 
         return ret_val
 
     def current_current_weather_data(self, param_dict : dict, simulation_time : datetime, time_step_number : TimeStepInformation, esdl_id : EsdlId, energy_system : EnergySystem):
         LOGGER.debug(f"Getting data at simulation time: {simulation_time.strftime(format='%m/%d/%Y %H:%M' )}")
         to_date_time = simulation_time + timedelta(seconds=self.step_size_in_seconds)
-        current_solar_irradiances = self.solar_irradiances[esdl_id].get_data(simulation_time, to_date_time)[0]
-        current_air_temperatures = self.air_temperatures[esdl_id].get_data(simulation_time, to_date_time)[0]
-        current_soil_temperatures = self.soil_temperatures[esdl_id].get_data(simulation_time, to_date_time)[0]
+        current_solar_irradiance = self.solar_irradiances[esdl_id].get_data(simulation_time, to_date_time)[0]
+        current_air_temperature = self.air_temperatures[esdl_id].get_data(simulation_time, to_date_time)[0]
+        current_soil_temperature = self.soil_temperatures[esdl_id].get_data(simulation_time, to_date_time)[0]
 
         ret_val = {}
-        ret_val["current_solar_irradiance"] = current_solar_irradiances
-        ret_val["current_air_temperature"] = current_air_temperatures
-        ret_val["current_soil_temperature"] = current_soil_temperatures
+        ret_val["current_solar_irradiance"] = current_solar_irradiance
+        ret_val["current_air_temperature"] = self.celcius_to_kelvin(current_air_temperature)
+        ret_val["current_soil_temperature"] = self.celcius_to_kelvin(current_soil_temperature)
 
         return ret_val
 
